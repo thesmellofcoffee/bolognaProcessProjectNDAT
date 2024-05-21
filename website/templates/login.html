@@ -1,0 +1,279 @@
+{% block content %}
+<div class="container" onclick="onclick">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="center">
+        <h2 style="margin-bottom: 20px;">Lütfen Giriş Yapınız</h2>
+        <form method="POST" action="{{ url_for('views.login') }}">
+            <div class="input-container">
+                <input type="text" id="tc_no" placeholder=" " name="tc_no" required>
+                <div class="cut"></div>
+                <label for="tc_no" class="placeholder">TC Kimlik No</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" placeholder=" " name="password" required>
+                <div class="cut"></div>
+                <label for="password" class="placeholder">Parola</label>
+            </div>
+            <div class="button-container">
+                <button class="button" style="margin-top: 20px;">
+                    Giriş Yap
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    min-height: 100vh;
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.container:hover .top:before, .container:active .top:before,
+.container:hover .bottom:before, .container:active .bottom:before,
+.container:hover .top:after, .container:active .top:after,
+.container:hover .bottom:after, .container:active .bottom:after {
+    margin-left: 200px;
+    transform-origin: -200px 50%;
+    transition-delay: 0s;
+}
+
+.container:hover .center, .container:active .center {
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.top:before, .bottom:before, .top:after, .bottom:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 200vmax;
+    height: 200vmax;
+    top: 50%;
+    left: 50%;
+    margin-top: -100vmax;
+    transform-origin: 0 50%;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    z-index: 10;
+    opacity: 0.65;
+    transition-delay: 0.2s;
+}
+
+.top:before {
+    transform: rotate(45deg);
+    background: #e46569;
+}
+
+.top:after {
+    transform: rotate(135deg);
+    background: #ecaf81;
+}
+
+.bottom:before {
+    transform: rotate(-45deg);
+    background: #60b8d4;
+}
+
+.bottom:after {
+    transform: rotate(-135deg);
+    background: #3745b5;
+}
+
+.center {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    transition-delay: 0s;
+    color: #333;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 5px;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    color: #333;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-container input:focus {
+    border-color: #e55743;
+}
+
+.cut {
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    background: #fcf3ec;
+    transition: height 0.3s, width 0.3s, top 0.3s, left 0.3s;
+}
+
+.placeholder {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+    transition: transform 0.3s, font-size 0.3s, color 0.3s;
+}
+
+input:focus + .cut,
+input:not(:placeholder-shown) + .cut {
+    height: 10px;
+    width: 100%;
+    top: -15px;
+    left: 0;
+}
+
+input:focus + .cut + .placeholder,
+input:not(:placeholder-shown) + .cut + .placeholder {
+    transform: translateY(-20px);
+    font-size: 12px;
+    color: #e55743;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.center button {
+    padding: 5px 10px;
+    border: none;
+    background-color: transparent;
+    color: #e55743;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    outline: none;
+    position: relative;
+    box-shadow: inset 0 0 0 2px currentColor;
+    transition: background 0.8s ease;
+}
+
+.center button:hover {
+    background: rgba(100, 0, 0, 0.03);
+}
+
+.button__horizontal, .button__vertical {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.8s ease;
+    will-change: transform;
+}
+
+.button__horizontal::before, .button__vertical::before {
+    content: '';
+    position: absolute;
+    border: inherit;
+}
+
+.button__horizontal {
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+}
+
+.button__horizontal::before {
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+}
+
+.button:hover .button__horizontal {
+    transform: scaleX(0);
+}
+
+.button__vertical {
+    border-left: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+}
+
+.button__vertical::before {
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+}
+
+.button:hover .button__vertical {
+    transform: scaleY(0);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fcf3ec;
+}
+
+.input-container input:focus + .cut,
+.input-container input:not(:placeholder-shown) + .cut,
+.input-container input:hover + .cut {
+    height: 10px;
+    width: 100%;
+    top: -18px; /* Yüksekliği ayarlayarak yukarı çıkmasını sağla */
+    left: 0;
+}
+
+.input-container input:focus + .cut + .placeholder,
+.input-container input:not(:placeholder-shown) + .cut + .placeholder,
+.input-container input:hover + .cut + .placeholder {
+    transform: translateY(-25px); /* Yukarı çıkma miktarını ayarla */
+    font-size: 12px;
+    color: #e55743;
+}
+</style>
+{% endblock %}

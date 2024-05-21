@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ course_title }}</h2>
+            <h5>{{ faculty_name }}</h5>
+            <hr>
+            <h4>Program Çıktıları</h4>
+            <ul>
+                {% for outcome in program_outcomes %}
+                <li>{{ outcome }}</li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h4>Öğrenme Çıktıları</h4>
+            <ul>
+                {% for outcome in learning_outcomes %}
+                <li>{{ outcome }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

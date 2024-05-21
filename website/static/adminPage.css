@@ -1,0 +1,14 @@
+.section-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #f8f9fa;
+    margin-bottom: 20px;
+}
+
+h2.text-dark {
+    color: #343a40;
+}
+
+.container {
+    margin-top: 20px;
+}

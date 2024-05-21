@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    :root {
+        --red: hsl(0, 78%, 62%);
+        --cyan: hsl(180, 62%, 55%);
+        --orange: hsl(34, 97%, 64%);
+        --blue: hsl(212, 86%, 64%);
+        --varyDarkBlue: hsl(234, 12%, 34%);
+        --grayishBlue: hsl(229, 6%, 66%);
+        --veryLightGray: hsl(0, 0%, 98%);
+        --weight1: 200;
+        --weight2: 400;
+        --weight3: 600;
+    }
+
+    body {
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--veryLightGray);
+    }
+
+    .header {
+        text-align: center;
+        line-height: 0.8;
+        margin-bottom: 50px;
+        margin-top: 100px;
+    }
+
+    .header p {
+        margin: 0 auto;
+        line-height: 2;
+        color: var(--grayishBlue);
+    }
+
+    .box p {
+        color: var(--grayishBlue);
+    }
+
+    .box {
+        border-radius: 5px;
+        box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+        padding: 30px;
+        margin: 20px;
+    }
+
+    .cyan {
+        border-top: 3px solid var(--cyan);
+    }
+
+    .red {
+        border-top: 3px solid var(--red);
+    }
+
+    .blue {
+        border-top: 3px solid var(--blue);
+    }
+
+    .orange {
+        border-top: 3px solid var(--orange);
+    }
+
+    h2 {
+        color: var(--varyDarkBlue);
+        font-weight: var(--weight3);
+    }
+
+    @media (min-width: 950px) {
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    .card a {
+        color: var(--grayishBlue);
+        text-decoration: none;
+    }
+
+    .card a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="header">
+    <h1>Okulumuzun Bölümleri</h1>
+</div>
+
+<div class="row">
+    {% set titles = [
+        (1, 'Eğitim Fakültesi', 'Matematik ve Fen Bilimleri Eğitimi'),
+        (2, 'Eğitim Fakültesi', 'Türkçe Eğitimi'),
+        (3, 'Eğitim Fakültesi', 'İlköğretim'),
+        (4, 'Eğitim Fakültesi', 'Yabancı Diller Eğitimi'),
+        (5, 'Eğitim Fakültesi', 'Güzel Sanatlar Eğitimi'),
+        (6, 'Eğitim Fakültesi', 'Eğitim Bilimleri'),
+        (7, 'Eğitim Fakültesi', 'Özel Eğitim'),
+        (8, 'Fen ve Edebiyat Fakültesi', 'Matematik'),
+        (9, 'Fen ve Edebiyat Fakültesi', 'Fizik'),
+        (10, 'Fen ve Edebiyat Fakültesi', 'Kimya'),
+        (11, 'Fen ve Edebiyat Fakültesi', 'Biyoloji'),
+        (12, 'Fen ve Edebiyat Fakültesi', 'Türk Dili ve Edebiyatı'),
+        (13, 'Fen ve Edebiyat Fakültesi', 'Tarih'),
+        (14, 'Fen ve Edebiyat Fakültesi', 'Coğrafya'),
+        (15, 'Fen ve Edebiyat Fakültesi', 'Felsefe'),
+        (16, 'Fen ve Edebiyat Fakültesi', 'Sosyoloji'),
+        (17, 'Fen ve Edebiyat Fakültesi', 'Arkeoloji'),
+        (18, 'Fen ve Edebiyat Fakültesi', 'Psikoloji'),
+        (19, 'Güzel Sanatlar Fakültesi', 'Resim'),
+        (20, 'Güzel Sanatlar Fakültesi', 'Heykel'),
+        (21, 'Güzel Sanatlar Fakültesi', 'Grafik Tasarım'),
+        (22, 'Güzel Sanatlar Fakültesi', 'Seramik'),
+        (23, 'Güzel Sanatlar Fakültesi', 'Geleneksel Türk Sanatları'),
+        (24, 'Güzel Sanatlar Fakültesi', 'Fotoğraf'),
+        (25, 'Güzel Sanatlar Fakültesi', 'Sahne Sanatları'),
+        (26, 'İlahiyat Fakültesi', 'Temel İslam Bilimleri'),
+        (27, 'İlahiyat Fakültesi', 'Felsefe ve Din Bilimleri'),
+        (28, 'İlahiyat Fakültesi', 'İslam Tarihi ve Sanatları'),
+        (29, 'Mühendislik Fakültesi', 'Bilgisayar Mühendisliği'),
+        (30, 'Mühendislik Fakültesi', 'Elektrik-Elektronik Mühendisliği'),
+        (31, 'Mühendislik Fakültesi', 'Gıda Mühendisliği'),
+        (32, 'Mühendislik Fakültesi', 'İnşaat Mühendisliği'),
+        (33, 'Mühendislik Fakültesi', 'Jeoloji Mühendisliği'),
+        (34, 'Mühendislik Fakültesi', 'Makine Mühendisliği'),
+        (35, 'Tıp Fakültesi', 'Temel Tıp Bilimleri'),
+        (36, 'Tıp Fakültesi', 'Dahili Tıp Bilimleri'),
+        (37, 'Tıp Fakültesi', 'Cerrahi Tıp Bilimleri'),
+        (38, 'Ziraat Fakültesi', 'Tarla Bitkileri'),
+        (39, 'Ziraat Fakültesi', 'Bahçe Bitkileri'),
+        (40, 'Ziraat Fakültesi', 'Bitki Koruma'),
+        (41, 'Ziraat Fakültesi', 'Tarım Ekonomisi'),
+        (42, 'Ziraat Fakültesi', 'Tarım Makineleri ve Teknolojileri Mühendisliği'),
+        (43, 'Ziraat Fakültesi', 'Toprak Bilimi ve Bitki Besleme'),
+        (44, 'Ziraat Fakültesi', 'Zootekni'),
+        (45, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'İktisat'),
+        (46, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'İşletme'),
+        (47, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Kamu Yönetimi'),
+        (48, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Maliye'),
+        (49, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Uluslararası İlişkiler'),
+        (50, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Ekonometri'),
+        (51, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Çalışma Ekonomisi ve Endüstri İlişkileri'),
+        (52, 'Biga İktisadi ve İdari Bilimler Fakültesi', 'Yönetim Bilişim Sistemleri'),
+        (53, 'Deniz Bilimleri ve Teknolojisi Fakültesi', 'Deniz Bilimleri'),
+        (54, 'Deniz Bilimleri ve Teknolojisi Fakültesi', 'Deniz Teknolojisi'),
+        (55, 'Diş Hekimliği Fakültesi', 'Klinik Bilimler'),
+        (56, 'Diş Hekimliği Fakültesi', 'Temel Bilimler'),
+        (57, 'Sağlık Bilimleri Fakültesi', 'Hemşirelik'),
+        (58, 'Sağlık Bilimleri Fakültesi', 'Beslenme ve Diyetetik'),
+        (59, 'Sağlık Bilimleri Fakültesi', 'Fizyoterapi ve Rehabilitasyon'),
+        (60, 'Turizm Fakültesi', 'Turizm İşletmeciliği'),
+        (61, 'Turizm Fakültesi', 'Gastronomi ve Mutfak Sanatları'),
+        (62, 'Turizm Fakültesi', 'Rekreasyon Yönetimi'),
+        (63, 'Uygulamalı Bilimler Yüksekokulu', 'Bankacılık ve Finans'),
+        (64, 'Uygulamalı Bilimler Yüksekokulu', 'Uluslararası Ticaret ve Lojistik'),
+        (65, 'Uygulamalı Bilimler Yüksekokulu', 'Yönetim Bilişim Sistemleri'),
+        (66, 'Uygulamalı Bilimler Yüksekokulu', 'Sigortacılık ve Risk Yönetimi'),
+        (67, 'Fen Bilimleri Enstitüsü', 'Biyoteknoloji'),
+        (68, 'Fen Bilimleri Enstitüsü', 'Çevre Bilimleri'),
+        (69, 'Fen Bilimleri Enstitüsü', 'Fizik'),
+        (70, 'Fen Bilimleri Enstitüsü', 'Gıda Mühendisliği'),
+        (71, 'Fen Bilimleri Enstitüsü', 'Kimya'),
+        (72, 'Fen Bilimleri Enstitüsü', 'Matematik'),
+        (73, 'Fen Bilimleri Enstitüsü', 'Ziraat'),
+        (74, 'Sosyal Bilimler Enstitüsü', 'Arkeoloji'),
+        (75, 'Sosyal Bilimler Enstitüsü', 'Coğrafya'),
+        (76, 'Sosyal Bilimler Enstitüsü', 'Felsefe'),
+        (77, 'Sosyal Bilimler Enstitüsü', 'İktisat'),
+        (78, 'Sosyal Bilimler Enstitüsü', 'İşletme'),
+        (79, 'Sosyal Bilimler Enstitüsü', 'Kamu Yönetimi'),
+        (80, 'Sosyal Bilimler Enstitüsü', 'Sosyoloji'),
+        (81, 'Sosyal Bilimler Enstitüsü', 'Tarih'),
+        (82, 'Sosyal Bilimler Enstitüsü', 'Türk Dili ve Edebiyatı'),
+        (83, 'Sosyal Bilimler Enstitüsü', 'Uluslararası İlişkiler'),
+        (84, 'Eğitim Bilimleri Enstitüsü', 'Eğitim Yönetimi'),
+        (85, 'Eğitim Bilimleri Enstitüsü', 'Eğitim Programları ve Öğretim'),
+        (86, 'Eğitim Bilimleri Enstitüsü', 'Rehberlik ve Psikolojik Danışmanlık'),
+        (87, 'Eğitim Bilimleri Enstitüsü', 'İlköğretim'),
+        (88, 'Eğitim Bilimleri Enstitüsü', 'Türkçe Eğitimi'),
+        (89, 'Eğitim Bilimleri Enstitüsü', 'Yabancı Diller Eğitimi'),
+        (90, 'Eğitim Bilimleri Enstitüsü', 'Matematik Eğitimi'),
+        (91, 'Sağlık Bilimleri Enstitüsü', 'Hemşirelik'),
+        (92, 'Sağlık Bilimleri Enstitüsü', 'Fizyoterapi ve Rehabilitasyon'),
+        (93, 'Sağlık Bilimleri Enstitüsü', 'Beslenme ve Diyetetik'),
+        (94, 'Sağlık Bilimleri Enstitüsü', 'Ebelik')
+    ] %}
+
+    {% set grouped_titles = {} %}
+    {% for id, title, subtitle in titles %}
+        {% if title in grouped_titles %}
+            {% set _ = grouped_titles[title].append((id, subtitle)) %}
+        {% else %}
+            {% set grouped_titles = grouped_titles.update({title: [(id, subtitle)]}) %}
+        {% endif %}
+    {% endfor %}
+
+    {% for title, subtitles in grouped_titles.items() %}
+    <div class="col-md-4 mb-4">
+        <div class="card box cyan">
+            <div class="card-body">
+                <h5 class="card-title">{{ title }}</h5>
+                <ul class="card-text">
+                    {% for id, subtitle in subtitles %}
+                    <li><a href="{{ url_for('views.course_details', course_id=id) }}">{{ subtitle }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

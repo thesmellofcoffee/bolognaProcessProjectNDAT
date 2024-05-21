@@ -1,0 +1,507 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* Styles */
+    :root {
+        --red: hsl(0, 78%, 62%);
+        --cyan: hsl(180, 62%, 55%);
+        --orange: hsl(34, 97%, 64%);
+        --blue: hsl(212, 86%, 64%);
+        --varyDarkBlue: hsl(234, 12%, 34%);
+        --grayishBlue: hsl(229, 6%, 66%);
+        --veryLightGray: hsl(0, 0%, 98%);
+        --weight1: 200;
+        --weight2: 400;
+        --weight3: 600;
+    }
+
+    body {
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--veryLightGray);
+    }
+
+    .attribution {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .attribution a {
+        color: hsl(228, 45%, 44%);
+    }
+
+    h1:first-of-type {
+        font-weight: var(--weight1);
+        color: var(--varyDarkBlue);
+    }
+
+    h1:last-of-type {
+        color: var(--varyDarkBlue);
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .header {
+        text-align: center;
+        line-height: 0.8;
+        margin-bottom: 50px;
+        margin-top: 100px;
+    }
+
+    .header p {
+        margin: 0 auto;
+        line-height: 2;
+        color: var(--grayishBlue);
+    }
+
+    .box p {
+        color: var(--grayishBlue);
+    }
+
+    .box {
+        border-radius: 5px;
+        box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+        padding: 30px;
+        margin: 20px;
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    img {
+        float: right;
+    }
+
+    @media (max-width: 450px) {
+        .box {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 950px) and (min-width: 450px) {
+        .box {
+            text-align: center;
+            height: auto;
+        }
+    }
+
+    .cyan {
+        border-top: 3px solid var(--cyan);
+    }
+
+    .red {
+        border-top: 3px solid var(--red);
+    }
+
+    .blue {
+        border-top: 3px solid var (--blue);
+    }
+
+    .orange {
+        border-top: 3px solid var(--orange);
+    }
+
+    h2 {
+        color: var(--varyDarkBlue);
+        font-weight: var(--weight3);
+    }
+
+    @media (min-width: 950px) {
+        .row1-container, .row2-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .box-down {
+            position: relative;
+            top: 0;
+        }
+
+        .header p {
+            width: 30%;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: 20px !important;
+    }
+
+    .btn-fancy {
+        padding: 5px 10px;
+        border: none;
+        background-color: transparent;
+        color: #e55743;
+        font-size: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        outline: none;
+        position: relative;
+        box-shadow: inset 0 0 0 2px currentColor;
+        transition: background 0.8s ease;
+        bottom: -10px !important;
+    }
+
+    .btn-fancy:hover {
+        background: rgba(100, 0, 0, 0.03);
+    }
+
+    .btn-fancy .button__horizontal, .btn-fancy .button__vertical {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: transform 0.8s ease;
+        will-change: transform;
+    }
+
+    .btn-fancy .button__horizontal::before, .btn-fancy .button__vertical::before {
+        content: '';
+        position: absolute;
+        border: inherit;
+    }
+
+    .btn-fancy .button__horizontal {
+        border-top: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+    }
+
+    .btn-fancy .button__horizontal::before {
+        top: -10px;
+        bottom: -10px;
+        left: -10px;
+        right: -10px;
+    }
+
+    .btn-fancy:hover .button__horizontal {
+        transform: scaleX(0);
+    }
+
+    .btn-fancy .button__vertical {
+        border-left: 2px solid currentColor;
+        border-right: 2px solid currentColor;
+    }
+
+    .btn-fancy .button__vertical::before {
+        top: -10px;
+        bottom: -10px;
+        left: -10px;
+        right: -10px;
+    }
+
+    .btn-fancy:hover .button__vertical {
+        transform: scaleY(0);
+    }
+
+    .delete-btn {
+        color: red;
+        cursor: pointer;
+    }
+
+    .search-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-container input[type="text"] {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid var(--grayishBlue);
+        border-radius: 5px;
+    }
+
+    .search-container button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+        background-color: var(--blue);
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .search-container button:hover {
+        background-color: var(--cyan);
+    }
+</style>
+
+<div class="header">
+    <h1>Admin Paneli</h1>
+</div>
+
+<div class="row1-container">
+    <!-- Yeni Kullanıcı Ekle -->
+    <div class="box cyan">
+        <h2>Yeni Kullanıcı Ekle</h2>
+        <p>Kullanıcı eklemek için aşağıdaki butona tıklayın.</p>
+        <a href="{{ url_for('views.add_user') }}">
+            <div class="button-container">
+                <button type="button" class="btn-fancy">
+                    Yeni Kullanıcı Ekle
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </a>
+    </div>
+
+    <!-- Ders Ekle -->
+    <div class="box red">
+        <h2>Ders Ekle</h2>
+        <form method="POST" action="{{ url_for('views.add_course') }}">
+            <div class="form-group">
+                <input type="text" class="form-control" name="course_name" placeholder="Ders Adı" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="course_content" placeholder="Ders İçeriği"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="department" placeholder="Bölüm" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn-fancy">
+                    Ekle
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Öğretim Elemanı Ata -->
+    <div class="box blue">
+        <h2>Öğretim Elemanı Ata</h2>
+        <form method="POST" action="{{ url_for('views.assign_teacher') }}">
+            <div class="form-group">
+                <select class="form-control" name="course_id" required>
+                    {% for course in courses|sort(attribute='name') %}
+                        <option value="{{ course.id }}">{{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="teacher_id" required>
+                    {% for teacher in teachers|sort(attribute='tc_no') %}
+                        <option value="{{ teacher.id }}">{{ teacher.tc_no }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn-fancy">
+                    Ata
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Program Çıktıları Ekle -->
+    <div class="box orange">
+        <h2>Program Çıktıları Ekle</h2>
+        <form method="POST" action="{{ url_for('views.add_program_outcome') }}">
+            <div class="form-group">
+                <select class="form-control" name="course_id" required>
+                    {% for course in courses|sort(attribute='name') %}
+                        <option value="{{ course.id }}">{{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="description" placeholder="Program Çıktısı" required></textarea>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn-fancy">
+                    Ekle
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row2-container">
+    <!-- Öğretim Elemanına Atanmış Dersler -->
+    <div class="box orange">
+        <h2>Öğretim Elemanına Atanmış Dersler</h2>
+        <div class="form-group">
+            <select id="teacher-select" class="form-control" onchange="fetchAssignedCourses()">
+                <option value="">Öğretim Elemanı Seç</option>
+                {% for teacher in teachers|sort(attribute='tc_no') %}
+                    <option value="{{ teacher.id }}">{{ teacher.tc_no }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <ul class="list-group" id="assigned-course-list">
+            <!-- Dynamically populated by JavaScript -->
+        </ul>
+    </div>
+
+    <!-- Şifre Değiştir -->
+    <div class="box orange">
+        <h2>Şifre Değiştir</h2>
+        <form method="POST" action="{{ url_for('views.change_password') }}">
+            <div class="form-group">
+                <select id="teacher-password-select" class="form-control" name="teacher_id" required>
+                    <option value="">Öğretim Elemanı Seç</option>
+                    {% for teacher in teachers|sort(attribute='tc_no') %}
+                        <option value="{{ teacher.id }}">{{ teacher.tc_no }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="admin_password" placeholder="Admin Şifresi" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="new_password" placeholder="Yeni Şifre" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn-fancy">
+                    Şifreyi Değiştir
+                    <div class="button__horizontal"></div>
+                    <div class="button__vertical"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Kullanıcı Sil -->
+    <div class="box orange" style="margin-top: 30px;">
+        <h2>Kullanıcı Sil</h2>
+        <div class="form-group">
+            <select id="user-select" class="form-control">
+                <option value="">Kullanıcı Seç</option>
+                {% for user in users|sort(attribute='tc_no') %}
+                    <option value="{{ user.id }}">{{ user.tc_no }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="button-container">
+            <button type="button" class="btn-fancy" onclick="deleteUser()">
+                Sil
+                <div class="button__horizontal"></div>
+                <div class="button__vertical"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mevcut Dersler -->
+    <div class="box orange" style="width: 80%; max-width: none;">
+        <h2>Mevcut Dersler</h2>
+        <div class="search-container">
+            <input type="text" id="search-course" placeholder="Ders Ara" onkeyup="searchCourse()">
+        </div>
+        <ul class="list-group" id="course-list">
+            {% for course in courses %}
+                <li class="list-group-item">
+                    {{ course.name }} - {{ course.department }}
+                    <span class="delete-btn" onclick="deleteCourse({{ course.id }})">&times;</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    function searchCourse() {
+        let input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search-course');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("course-list");
+        li = ul.getElementsByTagName('li');
+
+        for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function deleteUser() {
+        let userId = document.getElementById('user-select').value;
+        if (userId) {
+            if (confirm('Bu kullanıcıyı silmek istediğinizden emin misiniz?')) {
+                fetch(`/admin/delete_user/${userId}`, { method: 'DELETE' })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Kullanıcı başarıyla silindi.');
+                            window.location.reload();
+                        } else {
+                            alert('Kullanıcı silinemedi.');
+                        }
+                    });
+            }
+        } else {
+            alert('Lütfen bir kullanıcı seçiniz.');
+        }
+    }
+
+    function deleteCourse(courseId) {
+        if (confirm('Bu dersi silmek istediğinizden emin misiniz?')) {
+            fetch(`/admin/delete_course/${courseId}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        alert('Ders silinemedi.');
+                    }
+                });
+        }
+    }
+
+    function fetchAssignedCourses() {
+        let teacherId = document.getElementById('teacher-select').value;
+        if (teacherId) {
+            fetch(`/admin/get_assigned_courses/${teacherId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let courseList = document.getElementById('assigned-course-list');
+                    courseList.innerHTML = '';
+                    data.courses.forEach(course => {
+                        let li = document.createElement('li');
+                        li.className = 'list-group-item';
+                        li.innerHTML = `
+                            ${course.name} - ${course.department}
+                            <span class="delete-btn" onclick="unassignCourse(${course.id}, ${teacherId})">&times;</span>
+                        `;
+                        courseList.appendChild(li);
+                    });
+                });
+        }
+    }
+
+    function unassignCourse(courseId, teacherId) {
+        if (confirm('Bu dersi öğretim elemanından almak istediğinizden emin misiniz?')) {
+            fetch(`/admin/unassign_course/${courseId}/${teacherId}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        fetchAssignedCourses();
+                    } else {
+                        alert('Ders öğretim elemanından alınamadı.');
+                    }
+                });
+        }
+    }
+</script>
+
+{% endblock %}
