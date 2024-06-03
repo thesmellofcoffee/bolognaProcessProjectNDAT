@@ -17,7 +17,7 @@
             <h4>Öğrenme Çıktıları</h4>
             <ul>
                 {% for outcome in learning_outcomes %}
-                <li>{{ outcome }}</li>
+                <li>{% if outcome.week %}Hafta {{ outcome.week }}{% else %}Henüz eklenmedi{% endif %}: {{ outcome.description }}</li>
                 {% endfor %}
             </ul>
         </div>
