@@ -14,7 +14,7 @@
   body {
     background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg") center center no-repeat;
     background-size: cover;
-    padding-top: 80px; /* Ensure there's enough space for the fixed navbar */
+    padding-top: 80px;
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -93,12 +93,21 @@
   }
 
   .container {
-    margin-top: 80px; /* Ensure there's enough space for the fixed navbar */
+    margin-top: 80px;
   }
 </style>
 
 <form method="POST" action="{{ url_for('views.add_learning_outcome', course_id=course.id) }}">
   <div class="form-group">
+    <label for="week">Hafta:</label>
+    <select id="week" name="week" class="form-control" required>
+      {% for i in range(1, 15) %}
+        <option value="{{ i }}">Hafta {{ i }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="description">Açıklama:</label>
     <textarea class="form-control" name="description" rows="3" required></textarea>
   </div>
   <div class="form-group">
