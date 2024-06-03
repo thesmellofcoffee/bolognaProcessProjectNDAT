@@ -54,7 +54,7 @@ def course_details(course_id):
                            course_title=course.name,
                            faculty_name=course.department,
                            program_outcomes=[po.description for po in program_outcomes],
-                           learning_outcomes=[lo.description for lo in learning_outcomes])
+                           learning_outcomes=[{'week': lo.week, 'description': lo.description} for lo in learning_outcomes])
 
 
 @views.route('/admin/add_user', methods=['GET', 'POST'])
@@ -169,9 +169,10 @@ def add_learning_outcome(course_id):
         return redirect(url_for('views.index'))
     course = Course.query.get(course_id)
     if request.method == 'POST':
+        week = request.form.get('week')
         description = request.form.get('description')
         relation_to_program_outcome = request.form.get('relation_to_program_outcome')
-        new_outcome = LearningOutcome(course_id=course.id, description=description,
+        new_outcome = LearningOutcome(course_id=course.id, week=week, description=description,
                                       relation_to_program_outcome=relation_to_program_outcome)
         db.session.add(new_outcome)
         db.session.commit()
