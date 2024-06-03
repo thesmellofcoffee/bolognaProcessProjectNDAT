@@ -26,3 +26,4 @@ class LearningOutcome(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
     description = db.Column(db.Text, nullable=False)
     relation_to_program_outcome = db.Column(db.Integer, nullable=False)
+    week = db.Column(db.Integer, nullable=False)  
